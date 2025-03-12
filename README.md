@@ -147,3 +147,64 @@ Um seller autenticado pode:
 ## 📌 Considerações Finais
 Este projeto fornece um sistema completo para mini mercados gerenciarem seus estoques e vendas com segurança e eficiência. 🚀
 
+## 📌 Estrutura incial projeto
+GEST_STOCK
+├── __pycache__
+├── .db
+│   ├── #innodb_temp
+│   ├── mysql
+│   ├── performance_schema
+│   ├── sys
+│   ├── #ib_16384_0.dblwr
+│   ├── #ib_16384_1.dblwr
+│   ├── auto.cnf
+│   ├── binlog.000001
+│   ├── binlog.000002
+│   ├── binlog.000003
+│   ├── binlog.000004
+│   ├── binlog.index
+│   ├── ca-key.pem
+│   ├── ca.pem
+│   ├── client-cert.pem
+│   ├── client-key.pem
+│   ├── ib_buffer_pool
+│   ├── ib_logfile0
+│   ├── ib_logfile1
+│   ├── ibdata1
+│   ├── ibtmp1
+│   ├── mysql.ibd
+│   ├── mysql.sock
+│   ├── private_key.pem
+│   ├── public_key.pem
+│   ├── server-cert.pem
+│   ├── server-key.pem
+│   ├── undo_001
+│   └── undo_002
+├── src
+│   ├── __pycache__
+│   │   └── routes.cpython-38.pyc
+│   ├── Application
+│   │   ├── Controllers
+│   │   │   ├── __pycache__
+│   │   │   └── user_controller.py
+│   │   └── Service
+│   │       ├── __pycache__
+│   │       └── user_service.py
+│   ├── config
+│   │   ├── __pycache__
+│   │   └── data_base.py
+│   ├── Domain
+│   │   ├── __pycache__
+│   │   └── user.py
+│   ├── Infrastructure
+│   ├── http
+│   │   └── whats_app.py
+│   ├── Model
+│   │   ├── __pycache__
+│   │   └── user.py
+│   ├── routes.py
+│   ├── docker-compose.yml
+│   ├── Dockerfile
+│   ├── README.md
+│   ├── requirements.txt
+│   └── run.py
