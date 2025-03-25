@@ -24,6 +24,6 @@ def send_whatsapp_message(to_number, message):
 
 #testando o envio aqui pessoal (Depois remover)
 if __name__ == "__main__":
-    destinatario = "whatsapp:+5511xxxx-xxxx"
+    destinatario = "whatsapp:+5511943336067" #Telefone do Luan
     mensagem = "Olá! Esta é uma mensagem de teste via WhatsApp usando Twilio."
     send_whatsapp_message(destinatario, mensagem)
