@@ -1,29 +1,17 @@
 FROM python:3.8-slim
 WORKDIR /src
-COPY requirements.txt requirements.txt
+ENV PYTHONUNBUFFERED=1
 
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt .
 
-COPY . /src
+RUN apt-get update && apt-get install -y gcc \
+    && pip install --no-cache-dir -r requirements.txt
 
-EXPOSE 5000
-
-ENV FLASK_RUN_HOST=0.0.0.0
-
-CMD ["flask", "run"]
-
-FROM python:3.8-slim
-
-WORKDIR /src
-
-COPY requirements.txt requirements.txt
-
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY . /src
+COPY . .
 
 EXPOSE 5000
 
 ENV FLASK_RUN_HOST=0.0.0.0
 ENV FLASK_ENV=development  # Mude para "production" em produção
-CMD ["flask", "run"]
+
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
