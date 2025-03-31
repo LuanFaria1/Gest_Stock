@@ -1,5 +1,6 @@
 from flask import jsonify, make_response
 from src.Application.Service.seller_service import SellerService
+from src.Infrastructure.Model.seller import Seller
 
 class SellerController:
     @staticmethod
@@ -16,14 +17,15 @@ class SellerController:
 
             seller = SellerService.create_seller(nome, cnpj, email, celular, senha)
 
-            if not seller:
+            # ✅ Verifica se realmente é um objeto Seller antes de chamar to_dict()
+            if not isinstance(seller, Seller):
                 return {"erro": "Erro ao cadastrar o seller"}
 
             return {
                 "mensagem": "Seller cadastrado com sucesso",
                 "seller": seller.to_dict()
             }
-        
+
         except Exception as e:
             print(f"Erro ao criar seller: {str(e)}")
             return {"erro": f"Erro interno: {str(e)}"}
@@ -34,19 +36,20 @@ class SellerController:
             celular = data.get('celular')
             codigo = data.get('codigo')
 
-            if not (celular and codigo):
+            if not all([celular, codigo]):
                 return {"erro": "Celular e código são obrigatórios"}
 
             seller = SellerService.activate_seller(celular, codigo)
 
-            if not seller:
-                return {"erro": "Código de ativação inválido ou seller não encontrado"}
+            # ✅ Verifica se realmente é um objeto Seller antes de chamar to_dict()
+            if not isinstance(seller, Seller):
+                return {"erro": "Código inválido ou seller não encontrado"}
 
             return {
                 "mensagem": "Seller ativado com sucesso",
                 "seller": seller.to_dict()
             }
-        
+
         except Exception as e:
             print(f"Erro ao ativar seller: {str(e)}")
             return {"erro": f"Erro interno: {str(e)}"}
