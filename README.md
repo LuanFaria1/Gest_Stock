@@ -1,210 +1,156 @@
-# 📦 Gestão de Estoque para Mini Mercados
+# 📦 Gestão de Estoque para Mini Mercados (Backend Flask)
 
 ## 📌 Objetivo
-Desenvolver um sistema para gestão de estoque e vendas de mini mercados, garantindo segurança, controle de acesso e gestão eficiente de produtos e vendas.
+Desenvolver um sistema backend para gestão de estoque e vendas de mini mercados, garantindo segurança, controle de acesso e gestão eficiente de produtos e vendas, servindo como API para o frontend React.
 
 ---
 
-## 🚀 Funcionalidades Principais
+## 🚀 Funcionalidades Principais Implementadas
 
-### 1️⃣ Cadastro de Mini Mercado (Seller)
-Os mini mercados devem se cadastrar informando os seguintes campos:
-- **Nome**
-- **CNPJ**
-- **E-mail**
-- **Celular**
-- **Senha**
-- **Status** (Padrão: Inativo)
-
-#### 🔹 Fluxo de Ativação do Seller:
-1. Após o cadastro, um código de 4 dígitos é enviado via **WhatsApp (Twilio)** para o seller.
-2. O seller deve inserir o código recebido para ativar sua conta.
-3. Somente sellers ativados podem fazer login e gerenciar produtos.
-
----
+### 1️⃣ Cadastro e Ativação de Mini Mercado (Seller)
+- **Cadastro:** Permite registrar novos sellers com Nome, CNPJ, E-mail, Celular e Senha. O status inicial é "Inativo".
+- **Ativação:** Um código de 4 dígitos é enviado via WhatsApp (Twilio) e o seller usa esse código para ativar a conta.
 
 ### 2️⃣ Autenticação do Seller
-- O sistema deve utilizar **JWT** ou **OAuth** para autenticação.
-- Sellers inativados não podem fazer login.
+- **Login:** Sellers ativos podem fazer login usando e-mail e senha.
+- **Autenticação:** Utiliza **Flask-JWT-Extended** para gerar e validar tokens JWT.
+- **Proteção:** Endpoints de gerenciamento de produtos e vendas são protegidos e requerem um token JWT válido.
 
----
+### 3️⃣ Gerenciamento de Produtos (por Seller Autenticado)
+- **Cadastrar:** Adicionar produtos com Nome, Preço, Quantidade, Status (Ativo/Inativo) e URL da Imagem.
+- **Listar:** Visualizar todos os produtos pertencentes ao seller logado.
+- **Ver Detalhes:** Obter informações de um produto específico.
+- **Editar:** Modificar informações de um produto existente.
+- **Inativar:** Marcar um produto como "Inativo".
+- **Regra:** Um seller só pode gerenciar seus próprios produtos.
 
-### 3️⃣ Gerenciamento de Produtos
-Um seller autenticado pode:
-- **Cadastrar produtos** com os seguintes campos:
-  - Nome
-  - Preço
-  - Quantidade
-  - Status (Ativo/Inativo)
-  - Imagem
-- **Listar produtos** cadastrados
-- **Editar produto**
-- **Ver detalhes de um produto**
-- **Inativar produtos**
-
-**Regras:**
-- O seller só pode visualizar e gerenciar seus próprios produtos.
-
----
-
-### 4️⃣ Venda de Produtos
-- O seller pode realizar uma venda informando:
-  - Produto
-  - Quantidade
-- As vendas devem ser armazenadas na tabela `Vendas`, contendo:
-  - ID do Produto
-  - Quantidade vendida
-  - Preço do produto no momento da venda
-
-**Regras:**
-- Não é possível vender mais do que a quantidade disponível em estoque.
-- Produtos inativados não podem ser vendidos.
-- Sellers inativos não podem realizar vendas.
-
----
-
-## 📡 Endpoints da API
-
-### 1️⃣ Cadastro e Ativação do Seller
-- **Criar Seller**
-  ```bash
-  curl -X POST "http://localhost:8080/api/sellers" \
-       -H "Content-Type: application/json" \
-       -d '{"nome": "Mini Mercado X", "cnpj": "00.000.000/0001-00", "email": "mercado@email.com", "celular": "+559999999999", "senha": "123456"}'
-  ```
-- **Ativar Seller via WhatsApp (Twilio)**
-  ```bash
-  curl -X POST "http://localhost:8080/api/sellers/activate" \
-       -H "Content-Type: application/json" \
-       -d '{"celular": "+559999999999", "codigo": "1234"}'
-  ```
-
-### 2️⃣ Autenticação
-- **Login**
-  ```bash
-  curl -X POST "http://localhost:8080/api/auth/login" \
-       -H "Content-Type: application/json" \
-       -d '{"email": "mercado@email.com", "senha": "123456"}'
-  ```
-
-### 3️⃣ Gerenciamento de Produtos
-- **Cadastrar Produto**
-  ```bash
-  curl -X POST "http://localhost:8080/api/products" \
-       -H "Authorization: Bearer SEU_TOKEN" \
-       -H "Content-Type: application/json" \
-       -d '{"nome": "Arroz", "preco": 10.50, "quantidade": 100, "status": "Ativo", "img": "url_da_imagem"}'
-  ```
-- **Listar Produtos**
-  ```bash
-  curl -X GET "http://localhost:8080/api/products" \
-       -H "Authorization: Bearer SEU_TOKEN"
-  ```
-- **Editar Produto**
-  ```bash
-  curl -X PUT "http://localhost:8080/api/products/1" \
-       -H "Authorization: Bearer SEU_TOKEN" \
-       -H "Content-Type: application/json" \
-       -d '{"nome": "Arroz Integral", "preco": 12.00, "quantidade": 50, "status": "Ativo"}'
-  ```
-- **Ver Detalhes de um Produto**
-  ```bash
-  curl -X GET "http://localhost:8080/api/products/1" \
-       -H "Authorization: Bearer SEU_TOKEN"
-  ```
-- **Inativar Produto**
-  ```bash
-  curl -X PATCH "http://localhost:8080/api/products/1/inactivate" \
-       -H "Authorization: Bearer SEU_TOKEN"
-  ```
-
-### 4️⃣ Realizar Venda
-- **Criar Venda**
-  ```bash
-  curl -X POST "http://localhost:8080/api/sales" \
-       -H "Authorization: Bearer SEU_TOKEN" \
-       -H "Content-Type: application/json" \
-       -d '{"produtoId": 1, "quantidade": 2}'
-  ```
+### 4️⃣ Venda de Produtos (por Seller Autenticado)
+- **Registrar Venda:** Informar o ID do produto e a quantidade vendida.
+- **Validação:** Verifica se o produto está ativo e se há estoque suficiente.
+- **Atualização:** Deduz a quantidade vendida do estoque do produto.
+- **Armazenamento:** Registra a venda com ID do produto, quantidade, preço no momento da venda e data.
+- **Regras:** Não vende produtos inativos ou sem estoque; sellers inativos não podem vender.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
-- **Back-end:** Kotlin + Spring Boot
-- **Front-end:** React.js
-- **Banco de Dados:** MySQL ou PostgreSQL
-- **Autenticação:** JWT ou OAuth
-- **Mensageria:** Twilio (para envio do código de ativação no WhatsApp)
+
+- **Framework:** Flask
+- **Banco de Dados:** MySQL (configurado via `docker-compose.yml`)
+- **ORM:** Flask-SQLAlchemy
+- **Autenticação:** Flask-JWT-Extended
+- **Mensageria:** Twilio (para WhatsApp)
+- **Variáveis de Ambiente:** python-dotenv
+- **Linguagem:** Python
 
 ---
 
-## 📊 Dashboard e Relatórios
-- Implementação de um painel para exibição de relatórios e análise de vendas.
-- Monitoramento de estoque em tempo real.
+## 📡 Endpoints da API (Principais)
+
+*Base URL padrão: `http://localhost:5000/api`*
+
+**Autenticação e Cadastro:**
+- `POST /api/sellers`: Registrar novo seller.
+- `POST /api/sellers/activate`: Ativar conta do seller com código.
+- `POST /api/auth/login`: Login do seller (retorna token JWT).
+
+**Produtos (Requer Token JWT no Header `Authorization: Bearer <token>`):**
+- `POST /api/products`: Cadastrar novo produto.
+- `GET /api/products`: Listar produtos do seller logado.
+- `GET /api/products/<int:product_id>`: Ver detalhes de um produto.
+- `PUT /api/products/<int:product_id>`: Atualizar um produto.
+- `PATCH /api/products/<int:product_id>/inactivate`: Inativar um produto.
+
+**Vendas (Requer Token JWT no Header `Authorization: Bearer <token>`):**
+- `POST /api/sales`: Registrar uma nova venda.
+
+**Outros:**
+- `GET /api/health`: Verificar status da API.
+
+*(Exemplos de `curl` foram removidos para brevidade, mas seguem o padrão RESTful)*
+
+---
+
+## ⚙️ Configuração e Execução
+
+### Pré-requisitos
+
+*   Docker e Docker Compose
+*   Python 3.8+
+*   Conta Twilio configurada (com SID, Auth Token e número WhatsApp) para ativação de conta.
+
+### Instalação e Configuração
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone https://github.com/LuanFaria1/Gest_Stock.git
+    cd Gest_Stock
+    ```
+2.  **Variáveis de Ambiente:**
+    *   Crie um arquivo `.env` na raiz do projeto (`/home/ubuntu/Gest_Stock/.env`).
+    *   Copie o conteúdo de um `.env.example` (se existir) ou adicione as seguintes variáveis:
+        ```dotenv
+        # Banco de Dados (usado pelo docker-compose e pela app)
+        MYSQL_ROOT_PASSWORD=root
+        MYSQL_DATABASE=gest_stock_db
+        MYSQL_USER=user
+        MYSQL_PASSWORD=password
+        DATABASE_URL=mysql+mysqlconnector://user:password@db:3306/gest_stock_db
+        
+        # Flask App
+        SECRET_KEY=sua_chave_secreta_flask_aqui # Gere uma chave segura
+        
+        # JWT
+        JWT_SECRET_KEY=sua_chave_secreta_jwt_aqui # Gere outra chave segura
+        
+        # Twilio (para ativação via WhatsApp)
+        TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        TWILIO_AUTH_TOKEN=your_auth_token
+        TWILIO_WHATSAPP_NUMBER=whatsapp:+14155238886 # Número da Twilio Sandbox ou seu número comprado
+        ```
+    *   **Importante:** Substitua os valores de exemplo por suas credenciais reais e chaves seguras.
+
+3.  **Subir os Serviços (Banco de Dados e API):**
+    ```bash
+    docker-compose up --build -d
+    ```
+    *   Isso construirá a imagem Docker para a API Flask e iniciará os contêineres para a API e o banco de dados MySQL.
+    *   A API estará acessível em `http://localhost:5000`.
+
+### ⚠️ Gerenciamento do Banco de Dados (Importante!)
+
+*   **Sem Migrations Automáticas:** Este projeto **não utiliza Flask-Migrate**. As tabelas do banco de dados (`sellers`, `products`, `sales`) são criadas automaticamente na inicialização da aplicação (`run.py`) usando `db.create_all()` se ainda não existirem.
+*   **Alterações no Schema:** Qualquer alteração futura nos modelos SQLAlchemy (por exemplo, adicionar uma nova coluna a `products`) **não será refletida automaticamente** no banco de dados existente. Você precisará gerenciar essas alterações manualmente, seja:
+    *   **Opção 1 (Desenvolvimento):** Apagar o volume do Docker do banco de dados (`docker-compose down -v`) e recriá-lo (`docker-compose up -d`). **Isso apagará todos os dados!**
+    *   **Opção 2 (Produção/Desenvolvimento):** Conectar-se ao banco de dados MySQL diretamente (usando um cliente como DBeaver, MySQL Workbench ou o comando `docker exec -it <container_id> mysql -u root -p`) e aplicar as alterações de schema manualmente usando comandos SQL `ALTER TABLE`.
+    *   **Opção 3:** Implementar o Flask-Migrate posteriormente para gerenciar migrações de forma mais robusta.
+
+---
+
+## 📌 Estrutura do Projeto (Simplificada)
+
+```
+/Gest_Stock
+├── src/
+│   ├── Application/
+│   │   ├── Controllers/ (auth_controller.py, product_controller.py, etc.)
+│   │   └── Service/     (auth_service.py, product_service.py, etc.)
+│   ├── config/        (data_base.py)
+│   ├── Infrastructure/
+│   │   ├── Model/       (seller.py, product.py, sale.py)
+│   │   └── http/        (whats_app.py)
+│   ├── routes.py      # Definição dos endpoints da API
+│   └── ...
+├── .env               # Variáveis de ambiente (NÃO versionar)
+├── docker-compose.yml # Orquestração dos contêineres
+├── Dockerfile         # Definição da imagem Docker da API
+├── requirements.txt   # Dependências Python
+├── run.py             # Ponto de entrada da aplicação Flask
+└── README.md          # Este arquivo
+```
 
 ---
 
 ## 📌 Considerações Finais
-Este projeto fornece um sistema completo para mini mercados gerenciarem seus estoques e vendas com segurança e eficiência. 🚀
+Este backend Flask fornece a API necessária para o frontend React do GestStock, implementando as funcionalidades de cadastro, autenticação, produtos e vendas. Lembre-se da gestão manual do schema do banco de dados devido à ausência do Flask-Migrate. 🚀
 
-## 📌 Estrutura incial projeto
-GEST_STOCK
-├── __pycache__
-├── .db
-│   ├── #innodb_temp
-│   ├── mysql
-│   ├── performance_schema
-│   ├── sys
-│   ├── #ib_16384_0.dblwr
-│   ├── #ib_16384_1.dblwr
-│   ├── auto.cnf
-│   ├── binlog.000001
-│   ├── binlog.000002
-│   ├── binlog.000003
-│   ├── binlog.000004
-│   ├── binlog.index
-│   ├── ca-key.pem
-│   ├── ca.pem
-│   ├── client-cert.pem
-│   ├── client-key.pem
-│   ├── ib_buffer_pool
-│   ├── ib_logfile0
-│   ├── ib_logfile1
-│   ├── ibdata1
-│   ├── ibtmp1
-│   ├── mysql.ibd
-│   ├── mysql.sock
-│   ├── private_key.pem
-│   ├── public_key.pem
-│   ├── server-cert.pem
-│   ├── server-key.pem
-│   ├── undo_001
-│   └── undo_002
-├── src
-│   ├── __pycache__
-│   │   └── routes.cpython-38.pyc
-│   ├── Application
-│   │   ├── Controllers
-│   │   │   ├── __pycache__
-│   │   │   └── user_controller.py
-│   │   └── Service
-│   │       ├── __pycache__
-│   │       └── user_service.py
-│   ├── config
-│   │   ├── __pycache__
-│   │   └── data_base.py
-│   ├── Domain
-│   │   ├── __pycache__
-│   │   └── user.py
-│   ├── Infrastructure
-│   ├── http
-│   │   └── whats_app.py
-│   ├── Model
-│   │   ├── __pycache__
-│   │   └── user.py
-│   ├── routes.py
-│   ├── docker-compose.yml
-│   ├── Dockerfile
-│   ├── README.md
-│   ├── requirements.txt
-│   └── run.py
