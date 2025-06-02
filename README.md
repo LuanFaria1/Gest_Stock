@@ -91,11 +91,19 @@ Desenvolver um sistema backend para gestão de estoque e vendas de mini mercados
     *   Copie o conteúdo de um `.env.example` (se existir) ou adicione as seguintes variáveis:
         ```dotenv
         # Banco de Dados (usado pelo docker-compose e pela app)
-        MYSQL_ROOT_PASSWORD=root
-        MYSQL_DATABASE=gest_stock_db
-        MYSQL_USER=user
-        MYSQL_PASSWORD=password
-        DATABASE_URL=mysql+mysqlconnector://user:password@db:3306/gest_stock_db
+    MYSQL_ROOT_PASSWORD=root
+    MYSQL_HOST=
+    MYSQL_DATABASE=market_management
+    MYSQL_USER=user
+    MYSQL_PASSWORD=senha
+    DATABASE_URL=mysql+mysqlconnector://user:senha@mysql57:3306/market_management
+    SECRET_KEY=senha_12345
+    JWT_SECRET_KEY=jwt_senha_12345
+    TWILIO_ACCOUNT_SID=ACbceeca7938df6e408cb3cb612421b966
+    TWILIO_AUTH_TOKEN=9e80ad9977370fddef9fbe21de6d437c
+    TWILIO_PHONE_NUMBER=whatsapp:+14155238886
+    MYSQL_HOST=db
+    TARGET_PHONE=whatsapp:+5511943336067
         
         # Flask App
         SECRET_KEY=sua_chave_secreta_flask_aqui # Gere uma chave segura
