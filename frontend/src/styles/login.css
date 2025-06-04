@@ -1,0 +1,99 @@
+/* Container principal da página de login */
+.login-container {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Caixa do formulário */
+.login-box {
+  background-color: #ffffff;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 400px;
+  transition: box-shadow 0.3s ease;
+}
+
+.login-box:hover {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.login-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 24px;
+  color: #111827;
+}
+
+/* Labels dos inputs */
+.login-label {
+  display: block;
+  font-weight: 600;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  color: #374151;
+}
+
+/* Campos de input */
+.login-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: #f9fafb;
+}
+
+.login-input:focus {
+  border-color: #6366f1;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+  background-color: #ffffff;
+}
+
+/* Botão */
+.login-button {
+  width: 100%;
+  margin-top: 24px;
+  padding: 12px;
+  background-color: #6366f1;
+  color: #ffffff;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+}
+
+.login-button:hover {
+  background-color: #4f46e5;
+}
+
+/* Rodapé do login */
+.login-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+.login-footer a {
+  color: #6366f1;
+  text-decoration: none;
+  margin-left: 4px;
+  font-weight: 500;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,694 @@
+/* ========== Páginas de Lista ========== */
+.product-list-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.product-list-header {
+  margin-bottom: 2rem;
+}
+.product-list-header h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+/* ========== Formulário ========== */
+.product-form-page {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-form-title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.product-form input,
+.product-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+.product-form button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.product-form button:hover {
+  background-color: #1d4ed8;
+}
+
+/* ========== Cadastrar Produto (AddProductPage) ========== */
+.add-product-page {
+  padding: 2rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.add-product-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+/* ========== Editar Produto (EditProductPage) ========== */
+.edit-product-page {
+  padding: 2rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.edit-product-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+/* ========== Detalhes do Produto (ProductDetailPage) ========== */
+.product-detail-page {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.detail-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+/* Estilo base da página de formulário de produto */
+.product-form-page {
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-top: 2rem;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Título da página */
+.product-form-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #1f2937; /* text-gray-800 */
+}
+
+/* Diferencia visual para cadastro e edição */
+.product-form-page.add-product-page {
+  border-left: 5px solid #4f46e5; /* Indigo */
+}
+
+.product-form-page.edit-product-page {
+  border-left: 5px solid #2563eb; /* Blue */
+}
+
+/* Formulário */
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Inputs e textarea */
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db; /* border-gray-300 */
+  border-radius: 0.375rem; /* rounded */
+  font-size: 1rem;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: #2563eb; /* Blue-600 */
+  outline: none;
+}
+
+/* Botão de envio */
+.form-submit-button {
+  background-color: #2563eb;
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.form-submit-button:hover {
+  background-color: #1d4ed8;
+}
+
+/* Mensagem de erro */
+.form-error {
+  color: #dc2626; /* Red-600 */
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.form-image-preview-wrapper {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  /* Adicionado para centralizar a imagem dentro do wrapper */
+  align-items: center; /* Alinha verticalmente se a imagem for menor que o wrapper */
+}
+
+.form-image-preview {
+  /* Estas são as chaves para fixar o tamanho */
+  width: 50px;   
+  height: 50px;  
+
+  object-fit: cover;
+
+  border-radius: 0.75rem; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* sombra suave */
+  border: 1px solid #d1d5db; /* borda cinza-claro (tailwind: gray-300) */
+  transition: transform 0.3s ease; /* Transição para o hover */
+
+
+}
+
+.form-image-preview:hover {
+  transform: scale(1.03);
+}
+
+.product-detail-container {
+  padding: 1rem;
+  max-width: 768px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+.product-detail-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.product-detail-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 768px) {
+  .product-detail-card {
+    flex-direction: row;
+  }
+}
+
+.product-detail-image {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.product-detail-content {
+  flex: 1;
+}
+
+.product-detail-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.product-detail-description {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.product-detail-info p {
+  margin-bottom: 0.5rem;
+}
+
+.product-status-ativo {
+  color: green;
+  font-weight: bold;
+}
+
+.product-status-inativo {
+  color: red;
+  font-weight: bold;
+}
+
+.product-detail-buttons {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.product-detail-back {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.product-back-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.product-back-link:hover {
+  text-decoration: underline;
+}
+
+.btn-editar {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-editar:hover {
+  background-color: #0056b3;
+  transform: scale(1.03);
+}
+
+.product-form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.form-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input-field,
+.input-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.input-textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+/* Pré-visualização da imagem */
+.image-preview-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.image-preview {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+}
+
+/* Botão de envio */
+.submit-button {
+  background-color: #4f46e5;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #3730a3;
+}
+
+/* Mensagem de erro */
+.form-error {
+  margin-top: 1rem;
+  color: red;
+  font-weight: 500;
+  text-align: center;
+}
+
+
+.btn-new-product {
+  /* Mantém as cores do Tailwind, mas as sobrescrevemos ou adicionamos aqui */
+  background-color: #020202; /* Cor indigo-600 */
+  color: white;
+  font-weight: bold;
+  padding: 5px; /* Aumentado um pouco o padding */
+  border-radius: 8px; /* Arredondamento um pouco maior */
+  text-decoration: none; /* Garante que não haja sublinhado */
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Adicionando transição para sombra */
+  
+  /* Para deixá-lo mais visível */
+  font-size: 1.1rem; /* Aumenta o tamanho da fonte */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra que o destaca */
+}
+
+.btn-new-product:hover {
+  background-color: #3730A3; /* Cor indigo-700 */
+  transform: translateY(-2px); /* Efeito de "subir" um pouco ao passar o mouse */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra mais intensa ao passar o mouse */
+}
+
+.product-card-image {
+  width: 400px;   /* Exemplo: Largura fixa para todas as imagens */
+  height: 400px;  /* Exemplo: Altura fixa para todas as imagens (torna-o um quadrado) */
+  
+  /* ESSENCIAL: Isso fará a imagem caber DENTRO do espaço, mantendo a proporção.
+     Pode haver espaços vazios nas laterais ou em cima/em baixo. */
+  object-fit: contain; 
+  
+  /* Opcional: Cor de fundo para preencher os espaços vazios quando object-fit: contain é usado */
+  background-color: #f0f0f0; /* Um cinza claro, ou branco, ou cor da sua preferência */
+  
+  /* Garante que a imagem se comporte como um bloco e possa ter margens automáticas */
+  display: block; 
+  margin: 0 auto; /* Centraliza a imagem horizontalmente dentro do seu contêiner pai */
+
+  /* Opcional: Adicione transições ou bordas para um visual mais agradável */
+  transition: transform 0.3s ease;
+  border-bottom: 1px solid #eee;
+  border-radius: 8px; /* Adicionando um leve arredondamento */
+}
+
+/* Opcional: Adicione um efeito de hover se desejar */
+.product-card-image:hover {
+  transform: scale(1.02);
+}
+
+.product-card-name {
+  font-size: 1.25rem; /* Um pouco maior */
+  font-weight: 700; /* Mais negrito */
+  color: #2c3e50; /* Cinza escuro profundo */
+  margin-bottom: 0.5rem;
+  white-space: nowrap; /* Garante que o texto não quebre linha */
+  overflow: hidden; /* Esconde o excesso */
+  text-overflow: ellipsis; /* Adiciona "..." se o texto for muito longo */
+  line-height: 1.3;
+}
+
+/* VALOR (PREÇO) */
+.product-card-price {
+  font-size: 1.8rem; /* Mais destacado */
+  font-weight: 800; /* Extra negrito */
+  color: #28a745; /* Um verde vibrante para o preço */
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.03em; /* Pequeno espaçamento para destaque */
+}
+
+/* STATUS (ATIVO/INATIVO) */
+.product-card-status {
+  padding: 0.3em 0.8em; /* Preenchimento aprimorado */
+  border-radius: 9999px; /* Totalmente arredondado (pill shape) */
+  font-size: 0.8rem; /* Tamanho da fonte menor */
+  font-weight: 700; /* Negrito */
+  text-transform: uppercase; /* Texto em maiúsculas */
+  letter-spacing: 0.05em; /* Espaçamento entre letras */
+  display: inline-block; /* Para que o padding funcione corretamente */
+}
+
+.product-card-status.active {
+  background-color: #e6ffee; /* Verde claro suave */
+  color: #1a7e3d; /* Verde mais escuro */
+  border: 1px solid #c8e6c9; /* Borda sutil */
+}
+
+.product-card-status.inactive {
+  background-color: #ffe6e6; /* Vermelho claro suave */
+  color: #a72828; /* Vermelho mais escuro */
+  border: 1px solid #ffcccb; /* Borda sutil */
+}
+
+/* BOTÕES (VENDER e INATIVAR) */
+.product-card-action-button {
+  font-size: 0.85rem; /* Levemente maior que 'xs' do Tailwind */
+  font-weight: 600; /* Seminegrito */
+  padding: 0.4rem 0.6rem; /* Preenchimento para botões compactos */
+  border-radius: 0.4rem; /* Leve arredondamento */
+  transition: all 0.2s ease-in-out; /* Transição suave */
+  text-decoration: none; /* Remover sublinhado se forem links */
+  border: none; /* Remover borda padrão de botão */
+  cursor: pointer;
+  display: inline-flex; /* Para alinhar melhor texto/ícones */
+  align-items: center;
+  justify-content: center;
+}
+
+.product-card-action-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #e0e0e0; /* Fundo cinza quando desabilitado */
+  color: #888; /* Texto cinza */
+  box-shadow: none;
+  transform: none;
+}
+
+/* BOTÃO VENDER */
+.product-card-sell-button {
+  color: #4a69bd; /* Azul sutil para vender */
+  background-color: #e8eaf6; /* Fundo muito claro */
+  border: 1px solid #c5cae9;
+}
+
+.product-card-sell-button:hover:not(:disabled) {
+  background-color: #3f51b5; /* Azul mais escuro no hover */
+  color: white;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.2);
+  transform: translateY(-1px);
+}
+
+/* BOTÃO INATIVAR */
+.product-card-inactivate-button {
+  color: #d32f2f; /* Vermelho para inativar */
+  background-color: #ffebee; /* Fundo muito claro */
+  border: 1px solid #ef9a9a;
+}
+
+.product-card-inactivate-button:hover:not(:disabled) {
+  background-color: #c62828; /* Vermelho mais escuro no hover */
+  color: white;
+  box-shadow: 0 2px 8px rgba(211, 47, 47, 0.2);
+  transform: translateY(-1px);
+}
+
+.sale-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro semi-transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Garante que o modal esteja acima de outros elementos */
+  animation: fadeInOverlay 0.3s ease-out; /* Animação suave para o overlay */
+}
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.sale-modal-content {
+  background-color: #ffffff;
+  padding: 2.5rem; /* Mais preenchimento */
+  border-radius: 1rem; /* Cantos arredondados */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Sombra mais forte */
+  width: 90%;
+  max-width: 450px; /* Largura máxima para o modal */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Espaçamento entre as seções */
+  transform: scale(0.95); /* Começa um pouco menor */
+  animation: scaleInModal 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; /* Animação de "pop" */
+}
+
+@keyframes scaleInModal {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.sale-modal-title {
+  font-size: 1.8rem; /* Título maior */
+  font-weight: 700; /* Mais negrito */
+  color: #333;
+  text-align: center;
+  margin-bottom: 1rem; /* Espaço abaixo do título */
+}
+
+.sale-modal-error {
+  color: #d32f2f;
+  background-color: #ffebee;
+  border: 1px solid #ef9a9a;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.sale-modal-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem; /* Espaçamento entre as linhas de informação */
+  padding: 0.8rem;
+  background-color: #f8f8f8; /* Fundo suave para informações */
+  border-radius: 0.6rem;
+  border: 1px solid #eee;
+}
+
+.sale-modal-product-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #424242;
+}
+.sale-modal-product-name-value { /* Estilo específico para o valor do nome do produto */
+    font-weight: 700; /* Mais negrito para o nome em si */
+    color: #333;
+}
+
+
+.sale-modal-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #28a745; /* Verde vibrante para preço */
+}
+
+.sale-modal-stock {
+  font-size: 0.95rem;
+  color: #616161;
+}
+
+.sale-modal-quantity-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sale-modal-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #424242;
+}
+
+.sale-modal-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #bdbdbd;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  text-align: center; /* Centraliza o número */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sale-modal-input::-webkit-outer-spin-button,
+.sale-modal-input::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* Remove setas em Chrome/Safari */
+  margin: 0;
+}
+
+.sale-modal-input:focus {
+  border-color: #5c6bc0;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(92, 107, 192, 0.2);
+}
+
+.sale-modal-buttons {
+  display: flex;
+  gap: 1rem; /* Espaço entre os botões */
+  justify-content: flex-end; /* Alinha os botões à direita */
+  margin-top: 1rem;
+}
+
+.sale-modal-button {
+  padding: 0.8rem 1.5rem;
+  border-radius: 0.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  border: none;
+  flex: 1; /* Para que os botões se estiquem e ocupem o mesmo espaço */
+  max-width: 180px; /* Limite de largura para botões */
+}
+
+.sale-modal-cancel-button {
+  background-color: #e0e0e0;
+  color: #424242;
+}
+
+.sale-modal-cancel-button:hover {
+  background-color: #c7c7c7;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sale-modal-confirm-button {
+  background-color: #4f46e5; /* Cor principal índigo */
+  color: white;
+}
+
+.sale-modal-confirm-button:hover:not(:disabled) {
+  background-color: #3730a3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.sale-modal-confirm-button:disabled {
+  background-color: #b0b0b0;
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+  transform: none;
+}
+
+
+
+
